@@ -1,0 +1,303 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 19, 2017, 6:11:35 PM
+    Author     : Jeffrey Lo
+*/
+
+.audio-block {
+  padding-left: 17px;
+  padding-right: 17px;
+  min-height: 34px;
+  height: auto;
+}
+
+.audio-block .error {
+  text-align: center;
+  color: #fff;
+  background-color: rgba(50, 50, 50, .5);
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  display: none;
+}
+
+.audio-widget {
+  padding: 0;
+  letter-spacing: 0;
+  text-transform: none;
+  font-style: normal;
+  font-weight: normal;
+  background-color: #181818;
+  color: #fff;
+  color: rgba(255, 255, 255, .95);
+  cursor: pointer;
+}
+
+.audio-widget .player {
+  moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: border-box;
+  font-size: 13px;
+  position: relative;
+  display: table;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* Action - Play Pause Styling*/
+
+.audio-widget .action {
+  cursor: pointer;
+  z-index: 99;
+  display: table-cell;
+  width: 15px;
+  vertical-align: middle;
+  position: relative;
+  padding: 20px 22px;
+  border-right-color: rgba(255, 255, 255, .15);
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.audio-widget .action:hover {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.audio-widget .action .play {
+  height: 100%;
+}
+
+.audio-widget .action .play-button {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #111;
+  border-left-color: rgba(255, 255, 255, .95);
+  -moz-transform: scale(.999);
+}
+
+.audio-widget .action .pause {
+  cursor: pointer;
+  height: 20px;
+  width: 5px;
+  position: relative;
+  display: none;
+  border: 0px solid #111;
+  border-width: 0 5px;
+  border-color: rgba(255, 255, 255, .95);
+}
+
+.audio-widget .action .pause-button {
+  position: relative;
+  width: 5px;
+  height: 25px;
+  border-left: 5px solid #111;
+  border-right: 5px solid #111;
+  -moz-transform: scale(.999);
+}
+
+
+/*Label Area*/
+
+.audio-widget .labels {
+  line-height: 1.4em;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 15px;
+  min-width: 150px;
+}
+
+.audio-widget .title-wrapper {
+  max-width: 100%;
+}
+
+.audio-widget .title-wrapper .title {
+  -webkit-transform: translateX(0%);
+  -moz-transform: translateX(0%);
+  -ms-transform: translateX(0%);
+  transform: translateX(0%);
+  cursor: default;
+  font-size: 1.2em
+}
+
+.audio-widget .title-wrapper .title.marquee-mark:after {
+  content: attr(data-title);
+  padding-left: .5em
+}
+
+.audio-widget .title-wrapper .title.marquee-mark:hover {
+  -webkit-animation-name: marquee-out;
+  -moz-animation-name: marquee-out;
+  -o-animation-name: marquee-out;
+  animation-name: marquee-out;
+  -webkit-animation-duration: 8s;
+  -moz-animation-duration: 8s;
+  -o-animation-duration: 8s;
+  animation-duration: 8s;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  animation-iteration-count: infinite
+}
+
+.audio-widget .artistName {
+  color: rgba(255, 255, 255, .5);
+  line-height: 1.4em;
+}
+
+
+/*Secondary Controls*/
+
+.audio-widget .secondary-controls {
+  line-height: 1.2em;
+  text-align: right;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 15px;
+  padding-left: 0;
+}
+
+.audio-widget .time {
+  white-space: nowrap;
+}
+
+.audio-widget .time .audio-progress {
+  display: inline-block;
+  text-align: right;
+  margin-right: 2px;
+}
+
+.audio-widget .time .audio-total:before {
+  content: ' / ';
+  visibility: hidden
+}
+
+.audio-widget .time .audio-progress.loaded+.audio-total.loaded:before {
+  visibility: visible
+}
+
+
+/*Track*/
+
+.audio-widget .track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(100% - 60px) !important;
+  z-index: 5;
+  margin-left: 60px;
+}
+
+.audio-widget .played {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, .05);
+  height: 100%;
+}
+
+.audio-widget .played .icon {
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all .2s ease-out;
+  background-color: rgba(255, 255, 255, .1);
+  cursor: ew-resize;
+}
+
+.audio-widget:hover .played .icon {
+  background-color: rgba(255, 255, 255, .2);
+}
+
+
+/*Playing*/
+
+.audio-widget.playing .action .play {
+  display: none;
+}
+
+.audio-widget.playing .action .pause {
+  display: block;
+}
+
+
+/*First Play*/
+
+.audio-widget.first-play {
+  cursor: pointer;
+}
+
+@keyframes marquee-out {
+  from {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%)
+  }
+  to {
+    -webkit-transform: translateX(-200%);
+    -moz-transform: translateX(-200%);
+    -ms-transform: translateX(-200%);
+    transform: translateX(-200%)
+  }
+}
+
+@-webkit-keyframes marquee-out {
+  from {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%)
+  }
+  to {
+    -webkit-transform: translateX(-200%);
+    -moz-transform: translateX(-200%);
+    -ms-transform: translateX(-200%);
+    transform: translateX(-200%)
+  }
+}
+
+@-moz-keyframes marquee-out {
+  from {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%)
+  }
+  to {
+    -webkit-transform: translateX(-200%);
+    -moz-transform: translateX(-200%);
+    -ms-transform: translateX(-200%);
+    transform: translateX(-200%)
+  }
+}
+
+@-o-keyframes marquee-out {
+  from {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%)
+  }
+  to {
+    -webkit-transform: translateX(-200%);
+    -moz-transform: translateX(-200%);
+    -ms-transform: translateX(-200%);
+    transform: translateX(-200%)
+  }
+}
